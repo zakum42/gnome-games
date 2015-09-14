@@ -22,14 +22,12 @@ BUILT_SOURCES = \
 gnome_games_SOURCES = \
 	command/command-runner.vala \
 	\
-	commodore/amiga-game.vala \
 	commodore/amiga-tracker-query.vala \
 	\
 	core/game.vala \
 	core/game-source.vala \
 	core/runner.vala \
 	\
-	doom/doom-game.vala \
 	doom/doom-tracker-query.vala \
 	\
 	dummy/dummy-game.vala \
@@ -42,47 +40,34 @@ gnome_games_SOURCES = \
 	desktop/desktop-game.vala \
 	desktop/desktop-tracker-query.vala \
 	\
-	nec/pc-engine-game.vala \
 	nec/pc-engine-tracker-query.vala \
 	\
-	nintendo/game-boy-game.vala \
 	nintendo/game-boy-header.vala \
 	nintendo/game-boy-tracker-query.vala \
-	nintendo/game-boy-advance-game.vala \
 	nintendo/game-boy-advance-tracker-query.vala \
-	nintendo/game-cube-game.vala \
 	nintendo/game-cube-header.vala \
 	nintendo/game-cube-tracker-query.vala \
 	nintendo/game-cube-uid.vala \
-	nintendo/nes-game.vala \
 	nintendo/nes-tracker-query.vala \
-	nintendo/nintendo-64-game.vala \
 	nintendo/nintendo-64-tracker-query.vala \
-	nintendo/nintendo-ds-game.vala \
 	nintendo/nintendo-ds-tracker-query.vala \
-	nintendo/snes-game.vala \
 	nintendo/snes-tracker-query.vala \
-	nintendo/wii-game.vala \
 	nintendo/wii-header.vala \
 	nintendo/wii-tracker-query.vala \
 	nintendo/wii-uid.vala \
-	nintendo/wii-ware-game.vala \
 	nintendo/wii-ware-tracker-query.vala \
 	\
+	retro/retro-game.vala \
 	retro/retro-log.vala \
 	retro/retro-runner.vala \
 	\
-	sega/dreamcast-game.vala \
 	sega/dreamcast-header.vala \
 	sega/dreamcast-tracker-query.vala \
 	sega/dreamcast-uid.vala \
-	sega/master-system-game.vala \
 	sega/master-system-header.vala \
 	sega/master-system-tracker-query.vala \
-	sega/mega-drive-game.vala \
 	sega/mega-drive-header.vala \
 	sega/mega-drive-tracker-query.vala \
-	sega/sega-saturn-game.vala \
 	sega/sega-saturn-header.vala \
 	sega/sega-saturn-tracker-query.vala \
 	sega/sega-saturn-uid.vala \
@@ -113,6 +98,9 @@ gnome_games_SOURCES = \
 	\
 	utils/fingerprint.vala \
 	utils/grep.vala \
+	utils/name.vala \
+	utils/path.vala \
+	utils/unique-identifier.vala \
 	\
 	main.vala \
 	$(BUILT_SOURCES) \

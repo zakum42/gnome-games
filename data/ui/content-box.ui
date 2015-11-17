@@ -48,7 +48,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEventBox" id="display_box">
+              <object class="GamesInputBox" id="display_box">
                 <property name="visible">True</property>
               </object>
               <packing>

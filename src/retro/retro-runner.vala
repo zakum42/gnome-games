@@ -58,7 +58,7 @@ public class Games.RetroRunner : Object, Runner {
 	private RetroLog log;
 	private Retro.Loop loop;
 
-	private Gtk.EventBox widget;
+	private InputBox widget;
 
 	private string uid;
 
@@ -81,11 +81,11 @@ public class Games.RetroRunner : Object, Runner {
 
 		video = new RetroGtk.CairoDisplay ();
 
-		widget = new Gtk.EventBox ();
+		widget = new InputBox ();
 		widget.add (video);
 		video.visible = true;
 
-		gamepad = new RetroGtk.VirtualGamepad (widget);
+//		gamepad = new RetroGtk.VirtualGamepad (widget);
 		keyboard = new RetroGtk.Keyboard (widget);
 
 		prepare_core (module_basename, game_path);
@@ -141,6 +141,12 @@ public class Games.RetroRunner : Object, Runner {
 		running = true;
 	}
 
+	public void set_keyboard (KeyboardDevice keyboard) {
+		var gamepad = new KeyboardGamepad (keyboard);
+		var retro_gamepad = new RetroGamepad (gamepad);
+		input.set_controller_device (0, retro_gamepad);
+	}
+
 	private void prepare_core (string module_basename, string game_path) throws Error {
 		var module_path = Retro.search_module (module_basename);
 		var module = File.new_for_path (module_path);
@@ -156,10 +162,17 @@ public class Games.RetroRunner : Object, Runner {
 		options = new Retro.Options ();
 		log = new RetroLog ();
 
-		var g = new LinuxGamepad ("/dev/input/js0");
-		var rg = new RetroGamepad (g);
+//		var k = new KeyboardGamepad (widget);
+//		var rg = new RetroGamepad (k);
+//		input.set_controller_device (0, rg);
 
-		input.set_controller_device (0, rg);
+//		var lgs = new LinuxGamepadSource ();
+//		int index = 0;
+//		lgs.foreach ((gamepad) => {
+//			var rg = new RetroGamepad (gamepad as LinuxGamepad);
+//			input.set_controller_device (index++, rg);
+//		});
+
 //		input.set_controller_device (0, gamepad);
 		input.set_keyboard (keyboard);
 

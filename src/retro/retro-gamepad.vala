@@ -1,12 +1,12 @@
 // This file is part of GNOME Games. License: GPLv3
 
 private class Games.RetroGamepad: Object, Retro.InputDevice {
-	public LinuxGamepad gamepad { get; construct; }
+	public Gamepad gamepad { get; construct; }
 
 	private bool[] buttons;
 	private int16[] axes;
 
-	public RetroGamepad (LinuxGamepad gamepad) {
+	public RetroGamepad (Gamepad gamepad) {
 		Object (gamepad: gamepad);
 	}
 

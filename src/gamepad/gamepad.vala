@@ -8,4 +8,7 @@ private interface Games.Gamepad: Object {
 	public abstract GamepadMappingType mapping_type { get; }
 	public abstract double[] axes { get; }
 	public abstract GamepadButton[] buttons { get; }
+
+	public signal void gamepad_button_event (GamepadButtonEvent event);
+	public signal void gamepad_axis_event (GamepadAxisEvent event);
 }

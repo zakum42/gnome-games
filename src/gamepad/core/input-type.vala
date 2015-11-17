@@ -2,9 +2,25 @@
 
 private enum Games.InputType {
 	AXIS,
-	BUTTON;
+	BUTTON,
+	KEY;
+
+	public static InputType? parse_string (string value) {
+		var tmp = value.down ();
+
+		switch (tmp) {
+		case "axis":
+			return InputType.AXIS;
+		case "button":
+			return InputType.BUTTON;
+		case "key":
+			return InputType.KEY;
+		default:
+			return null;
+		}
+	}
 
 	public static uint length () {
-		return InputType.BUTTON + 1;
+		return InputType.KEY + 1;
 	}
 }

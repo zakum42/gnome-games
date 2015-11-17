@@ -48,6 +48,7 @@ gnome_games_SOURCES = \
 	dummy/dummy-runner.vala \
 	\
 	gamepad/core/gamepad-mapping.vala \
+	gamepad/core/gamepad-source.vala \
 	gamepad/core/filter-type.vala \
 	gamepad/core/input-type.vala \
 	gamepad/core/input-mapping.vala \
@@ -56,9 +57,15 @@ gnome_games_SOURCES = \
 	gamepad/gamepad-button.vala \
 	gamepad/gamepad-mapping-type.vala \
 	gamepad/linux/linux-gamepad.vala \
+	gamepad/linux/linux-gamepad-source.vala \
 	gamepad/linux/linux-joystick.vala \
 	gamepad/linux/linux-joystick-event.vala \
 	gamepad/linux/linux-joystick-mapping.vala \
+	gamepad/linux/linux-joystick-monitor.vala \
+	gamepad/keyboard/keyboard-device.vala \
+	gamepad/keyboard/keyboard-gamepad.vala \
+	gamepad/keyboard/keyboard-mapping.vala \
+	gamepad/keyboard/keyboard-widget.vala \
 	gamepad/mapping-doc.vala \
 	gamepad/mapping-node.vala \
 	gamepad/standard-gamepad-axis.vala \
@@ -83,6 +90,7 @@ gnome_games_SOURCES = \
 	ui/game-icon-view.vala \
 	ui/game-thumbnail.vala \
 	ui/header-bar.vala \
+	ui/input-box.vala \
 	ui/preferences-page.vala \
 	ui/preferences-page-plugins.vala \
 	ui/preferences-page-plugins-item.vala \

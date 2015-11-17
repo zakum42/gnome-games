@@ -91,6 +91,11 @@ private class Games.ApplicationWindow : Gtk.ApplicationWindow {
 		content_box.runner = runner;
 		ui_state = UiState.DISPLAY;
 
+		if (runner is RetroRunner) {
+			var retro_runner = runner as RetroRunner;
+			retro_runner.set_keyboard (content_box.input_box);
+		}
+
 		var resume = false;
 
 		if (runner.can_resume) {

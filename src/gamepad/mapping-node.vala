@@ -58,27 +58,13 @@ private class Games.MappingNode: XmlNode {
 	}
 
 	private static InputType? get_type_for_input_node (Xml.Node* input_node) {
-		switch (input_node->name) {
-		case "axis":
-			return InputType.AXIS;
-		case "button":
-			return InputType.BUTTON;
-		}
-
-		return null;
+		return InputType.parse_string (input_node->name);
 	}
 
-	private static FilterType? get_filter_for_input_node (Xml.Node* input_node) {
-		switch (input_node->get_prop ("filter")) {
-		case null:
-			return FilterType.NONE;
-		case "positive":
-			return FilterType.POSITIVE;
-		case "negative":
-			return FilterType.NEGATIVE;
-		}
+	private static FilterType get_filter_for_input_node (Xml.Node* input_node) {
+		var filter = input_node->get_prop ("filter");
 
-		return FilterType.NONE;
+		return FilterType.parse_string (filter) ?? FilterType.NONE;
 	}
 
 	private GamepadMappingType get_mapping_type () {

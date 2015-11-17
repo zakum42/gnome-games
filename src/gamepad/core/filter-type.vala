@@ -5,6 +5,21 @@ private enum Games.FilterType {
 	POSITIVE,
 	NEGATIVE;
 
+	public static FilterType? parse_string (string value) {
+		var tmp = value.down ();
+
+		switch (tmp) {
+		case "none":
+			return FilterType.NONE;
+		case "positive":
+			return FilterType.POSITIVE;
+		case "negative":
+			return FilterType.NEGATIVE;
+		default:
+			return null;
+		}
+	}
+
 	public double apply (double value) {
 		switch (this) {
 		case FilterType.NONE:

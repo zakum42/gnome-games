@@ -1,6 +1,6 @@
 // This file is part of GNOME Games. License: GPLv3
 
-private class Games.LinuxGamepad: LinuxJoystick, Gamepad {
+private class Games.KeyboardGamepad: Object, Gamepad {
 	public string id {
 		get {
 			return "";
@@ -41,31 +41,19 @@ private class Games.LinuxGamepad: LinuxJoystick, Gamepad {
 
 	private static MappingDoc mapping_doc;
 
+	public KeyboardMapping mapping { get; set; }
 
-	public LinuxJoystickMapping mapping { get; set; }
+	public KeyboardGamepad (KeyboardDevice keyboard) {
+		keyboard.key_event.connect (on_key_event);
 
-	public LinuxGamepad (string file_name, bool with_default_mapping = true) throws FileError, IOError {
-		base (file_name);
-
-		mapping = new LinuxJoystickMapping ();
-
-//		if (with_default_mapping)
-//			mapping = MappingSet.get_default ().get_mapping (get_name ());
-
-//		if (mapping == null)
-//			mapping = new Mapping ();
-
-		button_press_event.connect (on_joystick_event);
-		button_release_event.connect (on_joystick_event);
-		axis_event.connect (on_joystick_event);
+		mapping = new KeyboardMapping ();
 
 		_connected = true;
-		unplug.connect (() => { _connected = false; });
 	}
 
 	construct {
 		if (mapping_doc == null)
-			mapping_doc = new MappingDoc.from_resource ("gamepads/linux.gamepads.xml");
+			mapping_doc = new MappingDoc.from_resource ("gamepads/keyboard.gamepads.xml");
 	}
 
 	private bool mapping_initiated = false;
@@ -73,17 +61,18 @@ private class Games.LinuxGamepad: LinuxJoystick, Gamepad {
 		if (mapping_initiated)
 			return;
 
-		var mapping_node = mapping_doc.get_mapping_for_gamepad_id (get_name ());
+		var mapping_node = mapping_doc.get_mapping_for_gamepad_id ("Virtual gamepad");
 		mapping_node.foreach_input_mapping ((input_mapping) => {
 			mapping.add (input_mapping);
 		});
+
 		mapping_initiated = true;
 	}
 
-	private void on_joystick_event (LinuxJoystickEvent e) {
+	private void on_key_event (Gdk.EventKey event, bool pressed) {
 		init_mapping ();
 
-		mapping.map_event (e, (gamepad_event) => {
+		mapping.map_event (event, pressed, (gamepad_event) => {
 			if (gamepad_event == null)
 				return;
 

@@ -48,7 +48,7 @@ private class Games.ContentBox : Gtk.Box {
 	[GtkChild]
 	private CollectionIconView collection_icon_view;
 	[GtkChild]
-	private Gtk.EventBox display_box;
+	private InputBox display_box;
 
 	private Runner _runner;
 	public Runner runner {
@@ -70,6 +70,10 @@ private class Games.ContentBox : Gtk.Box {
 		private get { return _runner; }
 	}
 	private ulong runner_stopped_id;
+
+	public InputBox input_box {
+		get { return display_box; }
+	}
 
 	public ContentBox (ListStore collection) {
 		collection_icon_view.model = collection;

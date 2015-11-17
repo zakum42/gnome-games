@@ -1,0 +1,23 @@
+<gamepads>
+  <gamepad id="Virtual gamepad">
+    <mapping type="standard">
+      <button index="0"><key index="39"/></button>
+      <button index="1"><key index="40"/></button>
+      <button index="2"><key index="38"/></button>
+      <button index="3"><key index="25"/></button>
+      <button index="4"><key index="24"/></button>
+      <button index="5"><key index="26"/></button>
+      <button index="6"><key index="10"/></button>
+      <button index="7"><key index="12"/></button>
+      <button index="8"><key index="22"/></button>
+      <button index="9"><key index="36"/></button>
+      <button index="10"><key index="52"/></button>
+      <button index="11"><key index="54"/></button>
+      <button index="12"><key index="111"/></button>
+      <button index="13"><key index="116"/></button>
+      <button index="14"><key index="113"/></button>
+      <button index="15"><key index="114"/></button>
+      <button index="16"><key index="110"/></button>
+    </mapping>
+  </gamepad>
+</gamepads>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.16 -->
+  <template class="GamesGamepadMappingView" parent="GtkBin">
+    <property name="visible">True</property>
+    <child>
+      <object class="GamesInputBox" id="input_box">
+        <property name="visible">True</property>
+        <child>
+          <object class="GamesStandardGamepadView" id="gamepad_view">
+            <property name="visible">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

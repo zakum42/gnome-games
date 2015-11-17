@@ -58,7 +58,7 @@ public class Games.RetroRunner : Object, Runner {
 	private RetroLog log;
 	private Retro.Loop loop;
 
-	private Gtk.EventBox widget;
+	private InputBox widget;
 
 	private string uid;
 
@@ -81,11 +81,11 @@ public class Games.RetroRunner : Object, Runner {
 
 		video = new RetroGtk.CairoDisplay ();
 
-		widget = new Gtk.EventBox ();
+		widget = new InputBox ();
 		widget.add (video);
 		video.visible = true;
 
-		gamepad = new RetroGtk.VirtualGamepad (widget);
+//		gamepad = new RetroGtk.VirtualGamepad (widget);
 		keyboard = new RetroGtk.Keyboard (widget);
 
 		prepare_core (module_basename, game_path);
@@ -156,7 +156,13 @@ public class Games.RetroRunner : Object, Runner {
 		options = new Retro.Options ();
 		log = new RetroLog ();
 
-		input.set_controller_device (0, gamepad);
+		int index = 0;
+		var keyboard_source = new KeyboardSource (widget);
+		keyboard_source.foreach ((gamepad) => {
+			var retro_gamepad = new RetroGamepad (gamepad);
+			input.set_controller_device (index++, retro_gamepad);
+		});
+
 		input.set_keyboard (keyboard);
 
 		core.variables_interface = options;

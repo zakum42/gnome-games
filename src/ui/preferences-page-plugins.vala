@@ -2,8 +2,16 @@
 
 [GtkTemplate (ui = "/org/gnome/Games/ui/preferences-page-plugins.ui")]
 private class Games.PreferencesPagePlugins: Gtk.Bin, PreferencesPage {
+	public string name {
+		get { return "plugins"; }
+	}
+
 	public string title {
 		get { return _("Extensions"); }
+	}
+
+	public Gtk.Widget controls {
+		get { return null; }
 	}
 
 	[GtkChild]

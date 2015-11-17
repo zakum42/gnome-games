@@ -47,7 +47,26 @@ gnome_games_SOURCES = \
 	dummy/dummy-game-source.vala \
 	dummy/dummy-runner.vala \
 	\
+	gamepad/core/filter-type.vala \
+	gamepad/core/gamepad-mapping.vala \
+	gamepad/core/gamepad-source.vala \
+	gamepad/core/input-mapping.vala \
+	gamepad/core/input-type.vala \
+	gamepad/events.vala \
+	gamepad/gamepad.vala \
+	gamepad/gamepad-button.vala \
+	gamepad/gamepad-mapping-type.vala \
+	gamepad/keyboard/keyboard-device.vala \
+	gamepad/keyboard/keyboard-gamepad.vala \
+	gamepad/keyboard/keyboard-mapping.vala \
+	gamepad/keyboard/keyboard-source.vala \
+	gamepad/mapping-doc.vala \
+	gamepad/mapping-node.vala \
+	gamepad/standard-gamepad-axis.vala \
+	gamepad/standard-gamepad-button.vala \
+	\
 	retro/retro-error.vala \
+	retro/retro-gamepad.vala \
 	retro/retro-log.vala \
 	retro/retro-runner.vala \
 	\
@@ -64,18 +83,29 @@ gnome_games_SOURCES = \
 	ui/error-info-bar.vala \
 	ui/game-icon-view.vala \
 	ui/game-thumbnail.vala \
+	ui/gamepad-mapping-view.vala \
+	ui/gamepad-page.vala \
 	ui/header-bar.vala \
+	ui/input-box.vala \
 	ui/preferences-page.vala \
+	ui/preferences-page-controls-gamepads.vala \
+	ui/preferences-page-gamepads.vala \
+	ui/preferences-page-gamepads-item.vala \
 	ui/preferences-page-plugins.vala \
 	ui/preferences-page-plugins-item.vala \
 	ui/preferences-window.vala \
 	ui/remote-display.vala \
 	ui/resume-dialog.vala \
 	ui/search-bar.vala \
+	ui/standard-gamepad-view.vala \
 	ui/ui-state.vala \
 	\
+	utils/directory-monitor.vala \
 	utils/fingerprint.vala \
 	utils/grep.vala \
+	utils/xml-doc.vala \
+	utils/xml-error.vala \
+	utils/xml-node.vala \
 	\
 	config.vala \
 	credits.vala \
@@ -88,6 +118,7 @@ gnome_games_VALAFLAGS = \
 	--pkg gio-2.0 \
 	--pkg glib-2.0 \
 	--pkg gtk+-3.0 \
+	--pkg libxml-2.0 \
 	--pkg tracker-sparql-1.0 \
 	--pkg retro-gobject-0.4 \
 	--pkg retro-gtk-0.4 \

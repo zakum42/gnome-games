@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.16 -->
+  <template class="GamesPreferencesPageControlsGamepads" parent="GtkStack">
+    <property name="visible">True</property>
+    <property name="expand">True</property>
+    <property name="visible-child">gamepads_box</property>
+    <property name="transition-type">GTK_STACK_TRANSITION_TYPE_NONE</property>
+    <child>
+      <object class="GtkBox" id="gamepads_box">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="add_keyboard_button">
+            <property name="visible">True</property>
+            <signal name="clicked" handler="on_add_keyboard_clicked"/>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="orientation">horizontal</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon_name">input-keyboard-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="icon_name">list-add-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="name">gamepads</property>
+        <property name="title" translatable="yes">Gamepads</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="testing_box">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="back_button">
+            <property name="visible">True</property>
+            <signal name="clicked" handler="on_back_clicked"/>
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon_name">go-previous-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="name">testing</property>
+        <property name="title" translatable="yes">Testing</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="mapping_box">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton" id="cancel_button">
+            <property name="visible">True</property>
+            <property name="label" translatable="true">Cancel</property>
+            <signal name="clicked" handler="on_cancel_clicked"/>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="name">mapping</property>
+        <property name="title" translatable="yes">Mapping</property>
+      </packing>
+    </child>
+  </template>
+</interface>

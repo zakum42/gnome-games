@@ -10,7 +10,11 @@
     <file preprocess="xml-stripblanks">ui/empty-collection.ui</file>
     <file preprocess="xml-stripblanks">ui/error-info-bar.ui</file>
     <file preprocess="xml-stripblanks">ui/game-icon-view.ui</file>
+    <file preprocess="xml-stripblanks">ui/gamepad-mapping-view.ui</file>
     <file preprocess="xml-stripblanks">ui/header-bar.ui</file>
+    <file preprocess="xml-stripblanks">ui/input-box.ui</file>
+    <file preprocess="xml-stripblanks">ui/preferences-page-controls-gamepads.ui</file>
+    <file preprocess="xml-stripblanks">ui/preferences-page-gamepads.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences-page-plugins.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences-page-plugins-item.ui</file>
     <file preprocess="xml-stripblanks">ui/preferences-window.ui</file>

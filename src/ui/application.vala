@@ -53,6 +53,12 @@ private class Games.Application : Gtk.Application {
 		return @"$data_dir/gnome-games";
 	}
 
+	public static string get_config_dir () {
+		var config_dir = Environment.get_user_config_dir ();
+
+		return @"$config_dir/gnome-games";
+	}
+
 	public static string get_saves_dir () {
 		var data_dir = get_data_dir ();
 
@@ -63,6 +69,12 @@ private class Games.Application : Gtk.Application {
 		var data_dir = get_data_dir ();
 
 		return @"$data_dir/snapshots";
+	}
+
+	public static string get_keyboard_mappings_dir () {
+		var config_dir = get_config_dir ();
+
+		return @"$config_dir/mappings/keyboard";
 	}
 
 	protected override void activate () {

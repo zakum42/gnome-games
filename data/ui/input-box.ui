@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.16 -->
+  <template class="GamesInputBox" parent="GtkEventBox">
+    <property name="visible">True</property>
+    <property name="can-focus">True</property>
+    <property name="keep-focus">True</property>
+
+    <signal name="focus-in-event" handler="on_focus_in_event"/>
+    <signal name="focus-out-event" handler="on_focus_out_event"/>
+    <signal name="button-press-event" handler="on_button_press_event"/>
+    <signal name="key-press-event" handler="on_key_press_event"/>
+    <signal name="key-release-event" handler="on_key_release_event"/>
+  </template>
+</interface>

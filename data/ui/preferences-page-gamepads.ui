@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.16 -->
+  <template class="GamesPreferencesPageGamepads" parent="GtkBin">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="visible">true</property>
+        <property name="expand">True</property>
+        <property name="visible-child">gamepads</property>
+        <property name="transition-type">GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT</property>
+        <child>
+          <object class="GtkScrolledWindow" id="gamepads">
+            <property name="visible">true</property>
+            <child>
+              <object class="GtkViewport">
+                <property name="visible">true</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="visible">true</property>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">true</property>
+                        <property name="border-width">12</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <object class="GtkListBox" id="list_box">
+                            <property name="selection-mode">none</property>
+                            <property name="visible">true</property>
+                            <signal name="row-activated" handler="on_row_activated"/>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">gamepads</property>
+            <property name="title" translatable="yes">Gamepads</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GamesInputBox" id="testing_box">
+            <property name="visible">True</property>
+            <child>
+              <object class="GamesStandardGamepadView" id="testing_view">
+                <property name="visible">True</property>
+                <property name="expand">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="width-request">480</property>
+                <property name="height-request">360</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">testing</property>
+            <property name="title" translatable="yes">Testing</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GamesInputBox" id="mapping_box">
+            <property name="visible">True</property>
+            <child>
+              <object class="GamesStandardGamepadView" id="mapping_view">
+                <property name="visible">True</property>
+                <property name="expand">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="width-request">480</property>
+                <property name="height-request">360</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">mapping</property>
+            <property name="title" translatable="yes">Mapping</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

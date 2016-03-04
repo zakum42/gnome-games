@@ -1,6 +1,8 @@
 // This file is part of GNOME Games. License: GPLv3
 
 private class Games.SteamGameSource : Object, GameSource {
+	private delegate void AppmanifestCallback (string appmanifest);
+
 	// From the home directory.
 	private const string REGISTRY_PATH = "/.steam/registry.vdf";
 	// From an install directory.
@@ -54,12 +56,18 @@ private class Games.SteamGameSource : Object, GameSource {
 	}
 
 	public async void each_game (GameCallback game_callback) {
-		foreach (var library in libraries)
-			foreach (var steamapps_dir in STEAMAPPS_DIRS)
-				yield each_game_in_steamapps_dir (library + steamapps_dir, game_callback);
+		yield each_appmanifest ((appmanifest) => {
+			for_appmanifest_game (appmanifest, game_callback);
+		});
 	}
 
-	public async void each_game_in_steamapps_dir (string directory, GameCallback game_callback) {
+	private async void each_appmanifest (AppmanifestCallback appmanifest_callback) {
+		foreach (var library in libraries)
+			foreach (var steamapps_dir in STEAMAPPS_DIRS)
+				yield each_appmanifest_in_steamapps_dir (library + steamapps_dir, appmanifest_callback);
+	}
+
+	private async void each_appmanifest_in_steamapps_dir (string directory, AppmanifestCallback appmanifest_callback) {
 		try {
 			var file = File.new_for_path (directory);
 
@@ -67,25 +75,29 @@ private class Games.SteamGameSource : Object, GameSource {
 
 			FileInfo info;
 			while ((info = enumerator.next_file ()) != null)
-				yield game_for_file_info (directory, info, game_callback);
+				yield appmanifest_for_file_info (directory, info, appmanifest_callback);
 		}
 		catch (Error e) {
 		}
 	}
 
-	public async void game_for_file_info (string directory, FileInfo info, GameCallback game_callback) {
+	private async void appmanifest_for_file_info (string directory, FileInfo info, AppmanifestCallback appmanifest_callback) {
 		var name = info.get_name ();
 		if (appmanifest_regex.match (name)) {
-			try {
-				var game = new SteamGame (Uri.for_path (@"$directory/$name"));
-				game_callback (game);
+			appmanifest_callback (Uri.for_path (@"$directory/$name"));
 
-				Idle.add (this.game_for_file_info.callback);
-				yield;
-			}
-			catch (Error e) {
-				warning ("%s\n", e.message);
-			}
+			Idle.add (this.appmanifest_for_file_info.callback);
+			yield;
+		}
+	}
+
+	private void for_appmanifest_game (string appmanifest, GameCallback game_callback) {
+		try {
+			var game = new SteamGame (appmanifest);
+			game_callback (game);
+		}
+		catch (Error e) {
+			warning ("%s\n", e.message);
 		}
 	}
 }

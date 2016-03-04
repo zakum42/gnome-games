@@ -100,4 +100,39 @@ private class Games.SteamGameSource : Object, GameSource {
 			warning ("%s\n", e.message);
 		}
 	}
+
+	private string? manifest_for_appid (string id) {
+		string? found_manifest;
+		each_appmanifest ((appmanifest) => {
+			if (found_manifest != null)
+				return;
+
+			// FIXME code copié collé, vilainpabo
+			var registry = new SteamRegistry (appmanifest);
+			var game_id = registry.get_data ({"AppState", "appid"});
+			/* The game_id sometimes is identified by appID
+			 * see issue https://github.com/Kekun/gnome-games/issues/169 */
+			if (game_id == null)
+				game_id = registry.get_data ({"AppState", "appID"});
+
+			if (game_id == id)
+				found_manifest = id;
+		});
+
+		return found_manifest;
+	}
+
+	public Game game_for_uri (string uri)
+		requires (uri != null) throws Error {
+		assert (uri != null)
+
+		switch (uri.split (":", 2)[0]) {
+		case "file":
+			return game_for_file_uri (uri);
+		case "steam":
+			return game_for_steam_uri (uri);
+		}
+
+		// TODO throw error
+	}
 }

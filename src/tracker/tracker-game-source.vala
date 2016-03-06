@@ -11,6 +11,10 @@ public class Games.TrackerGameSource : Object, GameSource {
 		this.query = query;
 	}
 
+	public bool is_uri_valid (string uri) {
+		return query.is_uri_valid (uri);
+	}
+
 	public async void each_game (GameCallback game_callback) {
 		yield each_game_for_query (game_callback, query);
 	}

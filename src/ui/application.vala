@@ -26,7 +26,7 @@ private class Games.Application : Gtk.Application {
 
 	public Application () {
 		Object (application_id: "org.gnome.Games",
-		        flags: ApplicationFlags.FLAGS_NONE);
+		        flags: ApplicationFlags.HANDLES_OPEN);
 	}
 
 	construct {
@@ -74,6 +74,12 @@ private class Games.Application : Gtk.Application {
 		var data_dir = get_data_dir ();
 
 		return @"$data_dir/snapshots";
+	}
+
+	protected override void open (File[] files, string hint) {
+		foreach (var f in files)
+			print ("open: %s\n", f.get_uri ());
+		activate ();
 	}
 
 	protected override void activate () {

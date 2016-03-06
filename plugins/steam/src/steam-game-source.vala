@@ -42,6 +42,17 @@ private class Games.SteamGameSource : Object, GameSource {
 		}
 	}
 
+	public bool is_uri_valid (string uri) {
+		try {
+			new SteamAppmanifest (uri);
+		}
+		catch (Error e) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public async void each_game (GameCallback game_callback) {
 		foreach (var library in libraries)
 			foreach (var steamapps_dir in STEAMAPPS_DIRS)

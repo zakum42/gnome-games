@@ -5,4 +5,8 @@ private class Games.DummyGameSource : Object, GameSource {
 		callback (new DummyGame ("Mines"));
 		callback (new DummyGame ("Sudoku"));
 	}
+
+	public bool is_uri_valid (string uri) {
+		return false;
+	}
 }

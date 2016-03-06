@@ -6,6 +6,7 @@ libgames_steam_plugin_la_DEPENDENCIES = \
 	$(NULL)
 
 libgames_steam_plugin_la_SOURCES = \
+	steam-appmanifest.vala \
 	steam-game.vala \
 	steam-game-source.vala \
 	steam-plugin.vala \

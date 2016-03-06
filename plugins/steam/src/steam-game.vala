@@ -25,19 +25,10 @@ private class Games.SteamGame : Object, Game {
 	}
 
 	public SteamGame (string uri) throws Error {
-		var registry = new SteamRegistry (uri);
-		game_id = registry.get_data ({"AppState", "appid"});
-		/* The game_id sometimes is identified by appID
-		 * see issue https://github.com/Kekun/gnome-games/issues/169 */
-		if (game_id == null)
-			game_id = registry.get_data ({"AppState", "appID"});
-		_name = registry.get_data ({"AppState", "name"});
+		var appmanifest = new SteamAppmanifest (uri);
 
-		if (game_id == null)
-			throw new SteamGameError.NO_APPID (@"Couldn't get Steam appid from manifest '$uri'");
-
-		if (name == null)
-			throw new SteamGameError.NO_NAME (@"Couldn't get name from manifest '$uri'");
+		game_id = appmanifest.appid;
+		_name = appmanifest.name;
 
 		try {
 			var icon_name = "steam_icon_" + game_id;

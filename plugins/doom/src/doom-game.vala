@@ -3,6 +3,7 @@
 private class Games.DoomGame : Object, Game {
 	private const string FINGERPRINT_PREFIX = "doom";
 	private const string MODULE_BASENAME = "libretro-doom.so";
+	private const bool SUPPORTS_SNAPSHOTTING = false;
 
 	private FingerprintUID _uid;
 	public FingerprintUID uid {
@@ -43,6 +44,6 @@ private class Games.DoomGame : Object, Game {
 	public Runner get_runner () throws Error {
 		var uid_string = uid.get_uid ();
 
-		return new RetroRunner (MODULE_BASENAME, path, uid_string);
+		return new RetroRunner (MODULE_BASENAME, path, uid_string, SUPPORTS_SNAPSHOTTING);
 	}
 }

@@ -75,10 +75,13 @@ public class Games.RetroRunner : Object, Runner {
 		get { return _running; }
 	}
 
+	private bool core_supports_snapshotting;
 	private bool construction_succeeded;
 	private bool should_save;
 
-	public RetroRunner (string module_basename, string game_path, string uid) throws Error {
+	public RetroRunner (string module_basename, string game_path, string uid, bool core_supports_snapshotting) throws Error {
+		this.core_supports_snapshotting = core_supports_snapshotting;
+
 		construction_succeeded = false;
 		should_save = false;
 

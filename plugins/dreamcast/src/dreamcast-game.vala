@@ -2,6 +2,7 @@
 
 private class Games.DreamcastGame : Object, Game {
 	private const string MODULE_BASENAME = "libretro-dreamcast.so";
+	private const bool SUPPORTS_SNAPSHOTTING = false;
 
 	private DreamcastUID _uid;
 	public DreamcastUID uid {
@@ -46,6 +47,6 @@ private class Games.DreamcastGame : Object, Game {
 	public Runner get_runner () throws Error {
 		var uid_string = uid.get_uid ();
 
-		return new RetroRunner (MODULE_BASENAME, path, uid_string);
+		return new RetroRunner (MODULE_BASENAME, path, uid_string, SUPPORTS_SNAPSHOTTING);
 	}
 }

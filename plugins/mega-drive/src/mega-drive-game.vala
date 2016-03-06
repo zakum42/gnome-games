@@ -3,6 +3,7 @@
 private class Games.MegaDriveGame : Object, Game {
 	private const string FINGERPRINT_PREFIX = "mega-drive";
 	private const string MODULE_BASENAME = "libretro-mega-drive.so";
+	private const bool SUPPORTS_SNAPSHOTTING = false;
 
 	private FingerprintUID _uid;
 	public FingerprintUID uid {
@@ -46,6 +47,6 @@ private class Games.MegaDriveGame : Object, Game {
 	public Runner get_runner () throws Error {
 		var uid_string = uid.get_uid ();
 
-		return new RetroRunner (MODULE_BASENAME, path, uid_string);
+		return new RetroRunner (MODULE_BASENAME, path, uid_string, SUPPORTS_SNAPSHOTTING);
 	}
 }

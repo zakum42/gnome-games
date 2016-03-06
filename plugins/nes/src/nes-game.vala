@@ -3,6 +3,7 @@
 private class Games.NesGame : Object, Game {
 	private const string FINGERPRINT_PREFIX = "nes";
 	private const string MODULE_BASENAME = "libretro-nes.so";
+	private const bool SUPPORTS_SNAPSHOTTING = true;
 
 	private FingerprintUID _uid;
 	public FingerprintUID uid {
@@ -43,6 +44,6 @@ private class Games.NesGame : Object, Game {
 	public Runner get_runner () throws Error {
 		var uid_string = uid.get_uid ();
 
-		return new RetroRunner (MODULE_BASENAME, path, uid_string);
+		return new RetroRunner (MODULE_BASENAME, path, uid_string, SUPPORTS_SNAPSHOTTING);
 	}
 }

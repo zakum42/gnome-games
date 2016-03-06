@@ -2,6 +2,7 @@
 
 private class Games.GameCubeGame : Object, Game {
 	private const string MODULE_BASENAME = "libretro-game-cube.so";
+	private const bool SUPPORTS_SNAPSHOTTING = false;
 
 	private GameCubeUID _uid;
 	public GameCubeUID uid {
@@ -46,6 +47,6 @@ private class Games.GameCubeGame : Object, Game {
 	public Runner get_runner () throws Error {
 		var uid_string = uid.get_uid ();
 
-		return new RetroRunner (MODULE_BASENAME, path, uid_string);
+		return new RetroRunner (MODULE_BASENAME, path, uid_string, SUPPORTS_SNAPSHOTTING);
 	}
 }

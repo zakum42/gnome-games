@@ -3,6 +3,7 @@
 private class Games.SnesGame : Object, Game {
 	private const string FINGERPRINT_PREFIX = "snes";
 	private const string MODULE_BASENAME = "libretro-snes.so";
+	private const bool SUPPORTS_SNAPSHOTTING = true;
 
 	private const ulong BASE_ROM_SIZE = 0x40000;
 
@@ -74,7 +75,7 @@ private class Games.SnesGame : Object, Game {
 	public Runner get_runner () throws Error {
 		var uid_string = uid.get_uid ();
 
-		return new RetroRunner (MODULE_BASENAME, path, uid_string);
+		return new RetroRunner (MODULE_BASENAME, path, uid_string, SUPPORTS_SNAPSHOTTING);
 	}
 }
 

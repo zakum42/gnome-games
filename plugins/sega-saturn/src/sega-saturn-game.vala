@@ -2,6 +2,7 @@
 
 private class Games.SegaSaturnGame : Object, Game {
 	private const string MODULE_BASENAME = "libretro-saturn.so";
+	private const bool SUPPORTS_SNAPSHOTTING = false;
 
 	private SegaSaturnUID _uid;
 	public SegaSaturnUID uid {
@@ -50,7 +51,7 @@ private class Games.SegaSaturnGame : Object, Game {
 	public Runner get_runner () throws Error {
 		var uid_string = uid.get_uid ();
 
-		return new RetroRunner (MODULE_BASENAME, path, uid_string);
+		return new RetroRunner (MODULE_BASENAME, path, uid_string, SUPPORTS_SNAPSHOTTING);
 	}
 
 	private string? get_associated_cue_sheet (File file) throws Error {

@@ -2,6 +2,7 @@
 
 public interface Games.GameSource : Object {
 	public abstract bool is_uri_valid (string uri);
+	public abstract Game game_for_uri (string uri) throws Error;
 	public abstract async void each_game (GameCallback callback);
 }
 

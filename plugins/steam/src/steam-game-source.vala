@@ -102,7 +102,7 @@ private class Games.SteamGameSource : Object, GameSource {
 	}
 
 	private string? manifest_for_appid (string id) {
-		string? found_manifest;
+		string? found_manifest = null;
 		each_appmanifest ((appmanifest) => {
 			if (found_manifest != null)
 				return;
@@ -122,17 +122,7 @@ private class Games.SteamGameSource : Object, GameSource {
 		return found_manifest;
 	}
 
-	public Game game_for_uri (string uri)
-		requires (uri != null) throws Error {
-		assert (uri != null)
-
-		switch (uri.split (":", 2)[0]) {
-		case "file":
-			return game_for_file_uri (uri);
-		case "steam":
-			return game_for_steam_uri (uri);
-		}
-
-		// TODO throw error
+	public Game game_for_uri (string uri) throws Error {
+		return new SteamGame (uri);
 	}
 }

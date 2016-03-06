@@ -5,4 +5,5 @@ public interface Games.TrackerQuery : Object {
 	public abstract bool is_uri_valid (string uri);
 	public abstract string get_query ();
 	public abstract Game game_for_cursor (Tracker.Sparql.Cursor cursor) throws Error;
+	public abstract Game game_for_uri (string uri) throws Error;
 }

@@ -77,9 +77,17 @@ private class Games.Application : Gtk.Application {
 	}
 
 	protected override void open (File[] files, string hint) {
-		foreach (var f in files)
-			print ("open: %s\n", f.get_uri ());
-		activate ();
+		if (window == null)
+			activate ();
+
+		if (files.length == 0)
+			return;
+
+		var uri = files[0].get_uri ();
+		var game = game_for_uri (uri);
+
+		if (game != null)
+			window.run_game (game);
 	}
 
 	protected override void activate () {
@@ -98,6 +106,28 @@ private class Games.Application : Gtk.Application {
 			quit ();
 		});
 		window.show ();
+	}
+
+	private Game? game_for_uri (string uri) {
+		Game? game = null;
+
+		var register = PluginRegister.get_register ();
+		register.foreach_plugin_registrar ((plugin_registrar) => {
+			if (game != null)
+				return;
+
+			try {
+				var plugin = plugin_registrar.get_plugin ();
+				var source = plugin.get_game_source ();
+				if (source != null && source.is_uri_valid (uri))
+					game = source.game_for_uri (uri);
+			}
+			catch (Error e) {
+				debug ("Error: %s", e.message);
+			}
+		});
+
+		return game;
 	}
 
 	public async void load_game_list () {

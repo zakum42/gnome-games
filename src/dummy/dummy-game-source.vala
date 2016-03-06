@@ -9,4 +9,8 @@ private class Games.DummyGameSource : Object, GameSource {
 	public bool is_uri_valid (string uri) {
 		return false;
 	}
+
+	public Game game_for_uri (string uri) throws Error {
+		return new DummyGame (uri);
+	}
 }

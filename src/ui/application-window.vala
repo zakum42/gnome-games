@@ -61,6 +61,9 @@ private class Games.ApplicationWindow : Gtk.ApplicationWindow {
 	}
 
 	public void run_game (Game game) {
+		if (!quit_game ())
+			return;
+
 		if (run_game_cancellable != null)
 			run_game_cancellable.cancel ();
 
@@ -143,15 +146,20 @@ private class Games.ApplicationWindow : Gtk.ApplicationWindow {
 			var dialog = new ResumeDialog ();
 			dialog.set_transient_for (this);
 
+			// is_cancelled is used to avoid crashes when calling
+			// cancellable.is_cancelled()
+			var is_cancelled = cancellable.is_cancelled ();
 			cancellable.cancelled.connect (() => {
+				is_cancelled = true;
+
 				dialog.destroy ();
 			});
 
 			var response = dialog.run ();
 			dialog.destroy ();
 
-			if (cancellable.is_cancelled ())
-				response = Gtk.ResponseType.CANCEL;
+			if (is_cancelled || cancellable.is_cancelled ())
+				return;
 
 			switch (response) {
 			case Gtk.ResponseType.CANCEL:
@@ -188,22 +196,25 @@ private class Games.ApplicationWindow : Gtk.ApplicationWindow {
 		if (content_box.runner == null)
 			return true;
 
+		content_box.runner.pause ();
+
 		if (content_box.runner.can_quit_safely)
 			return true;
-
-		content_box.runner.pause ();
 
 		var dialog = new QuitDialog ();
 		dialog.set_transient_for (this);
 
+		var is_cancelled = cancellable.is_cancelled ();
 		cancellable.cancelled.connect (() => {
+			is_cancelled = true;
+
 			dialog.destroy ();
 		});
 
 		var response = dialog.run ();
 		dialog.destroy ();
 
-		if (cancellable.is_cancelled ())
+		if (is_cancelled || cancellable.is_cancelled ())
 			return cancel_quitting_game ();
 
 		if (response == Gtk.ResponseType.ACCEPT)

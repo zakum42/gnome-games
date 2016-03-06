@@ -23,6 +23,11 @@ private class Games.DesktopTrackerQuery : Object, TrackerQuery {
 
 	public Game game_for_cursor (Tracker.Sparql.Cursor cursor) throws Error {
 		var uri = cursor.get_string (0);
+
+		return game_for_uri (uri);
+	}
+
+	public Game game_for_uri (string uri) throws Error {
 		check_uri (uri);
 
 		return new DesktopGame (uri);

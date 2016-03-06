@@ -67,15 +67,20 @@ public class Games.RetroRunner : Object, Runner {
 		set {
 			_running = value;
 
+			if (running)
+				should_save = true;
+
 			video.sensitive = running;
 		}
 		get { return _running; }
 	}
 
 	private bool construction_succeeded;
+	private bool should_save;
 
 	public RetroRunner (string module_basename, string game_path, string uid) throws Error {
 		construction_succeeded = false;
+		should_save = false;
 
 		this.uid = uid;
 
@@ -217,9 +222,14 @@ public class Games.RetroRunner : Object, Runner {
 	}
 
 	private void save () throws Error {
+		if (!should_save)
+			return;
+
 		save_ram ();
 		save_snapshot ();
 		save_screenshot ();
+
+		should_save = false;
 	}
 
 	private void save_ram () throws Error{

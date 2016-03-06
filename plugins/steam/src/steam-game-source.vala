@@ -21,7 +21,7 @@ private class Games.SteamGameSource : Object, GameSource {
 
 		// Steam's installation path can be found in its registry.
 		var registry_path = Environment.get_home_dir () + REGISTRY_PATH;
-		var registry = new SteamRegistry (registry_path);
+		var registry = new SteamRegistry (Uri.for_path (registry_path));
 		var install_path = registry.get_data (INSTALL_PATH_REGISTRY_PATH);
 
 		libraries = { install_path };
@@ -35,7 +35,7 @@ private class Games.SteamGameSource : Object, GameSource {
 				continue;
 
 			var library_reg_path = install_steamapps_dir + LIBRARY_DIRS_REG;
-			var library_reg = new SteamRegistry (library_reg_path);
+			var library_reg = new SteamRegistry (Uri.for_path (library_reg_path));
 			foreach (var child in library_reg.get_children ({ "LibraryFolders" }))
 				if (/^\d+$/.match (child))
 					libraries += library_reg.get_data ({ "LibraryFolders", child });
@@ -66,7 +66,7 @@ private class Games.SteamGameSource : Object, GameSource {
 		var name = info.get_name ();
 		if (appmanifest_regex.match (name)) {
 			try {
-				var game = new SteamGame (@"$directory/$name");
+				var game = new SteamGame (Uri.for_path (@"$directory/$name"));
 				game_callback (game);
 
 				Idle.add (this.game_for_file_info.callback);

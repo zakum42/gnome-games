@@ -3,8 +3,8 @@
 private class Games.SteamRegistry {
 	private SteamRegistryValue tree;
 
-	public SteamRegistry (string appmanifest_path) throws Error {
-		var tokens = tokenize (appmanifest_path);
+	public SteamRegistry (string uri) throws Error {
+		var tokens = tokenize (uri);
 		size_t index = 0;
 		tree = parse_tokens (null, tokens, ref index);
 	}
@@ -61,11 +61,11 @@ private class Games.SteamRegistry {
 		return null;
 	}
 
-	private string[] tokenize (string appmanifest_path) throws Error {
-		var file = File.new_for_path (appmanifest_path);
+	private string[] tokenize (string uri) throws Error {
+		var file = File.new_for_uri (uri);
 
 		if (!file.query_exists ())
-			throw new IOError.NOT_FOUND ("File '%s' doesn't exist.\n", file.get_path ());
+			throw new IOError.NOT_FOUND ("File '%s' doesn't exist.\n", uri);
 
 		var dis = new DataInputStream (file.read ());
 

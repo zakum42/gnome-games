@@ -3,8 +3,7 @@
 private class Games.DoomPlugin : Object, Plugin {
 	public GameSource get_game_source () throws Error {
 		var connection = Tracker.Sparql.Connection.@get ();
-		var source = new TrackerGameSource (connection);
-		source.add_query (new DoomTrackerQuery ());
+		var source = new TrackerGameSource (connection, new DoomTrackerQuery ());
 
 		return source;
 	}

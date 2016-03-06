@@ -4,23 +4,15 @@ public class Games.TrackerGameSource : Object, GameSource {
 	private const uint HANDLED_GAMES_PER_CYCLE = 5;
 
 	private Tracker.Sparql.Connection connection { private set; get; }
-	private TrackerQuery[] queries;
+	private TrackerQuery query;
 
-	public TrackerGameSource (Tracker.Sparql.Connection connection) {
+	public TrackerGameSource (Tracker.Sparql.Connection connection, TrackerQuery query) {
 		this.connection = connection;
-	}
-
-	construct {
-		queries = {};
-	}
-
-	public void add_query (TrackerQuery query) {
-		queries += query;
+		this.query = query;
 	}
 
 	public async void each_game (GameCallback game_callback) {
-		for (size_t i = 0 ; i < queries.length ; i++)
-			yield each_game_for_query (game_callback, queries[i]);
+		yield each_game_for_query (game_callback, query);
 	}
 
 	public async void each_game_for_query (GameCallback game_callback, TrackerQuery query) {

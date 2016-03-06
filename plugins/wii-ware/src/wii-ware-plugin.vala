@@ -3,8 +3,7 @@
 private class Games.WiiWarePlugin : Object, Plugin {
 	public GameSource get_game_source () throws Error {
 		var connection = Tracker.Sparql.Connection.@get ();
-		var source = new TrackerGameSource (connection);
-		source.add_query (new WiiWareTrackerQuery ());
+		var source = new TrackerGameSource (connection, new WiiWareTrackerQuery ());
 
 		return source;
 	}

@@ -112,13 +112,6 @@ private class Games.Application : Gtk.Application {
 
 		foreach (var source in sources)
 			yield source.each_game (add_game);
-
-		if (connection == null)
-			return;
-
-		var tracker_source = new TrackerGameSource (connection);
-
-		yield tracker_source.each_game (add_game);
 	}
 
 	private void add_game (Game game) {

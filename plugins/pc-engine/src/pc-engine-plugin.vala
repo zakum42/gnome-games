@@ -3,8 +3,7 @@
 private class Games.PcEnginePlugin : Object, Plugin {
 	public GameSource get_game_source () throws Error {
 		var connection = Tracker.Sparql.Connection.@get ();
-		var source = new TrackerGameSource (connection);
-		source.add_query (new PcEngineTrackerQuery ());
+		var source = new TrackerGameSource (connection, new PcEngineTrackerQuery ());
 
 		return source;
 	}

@@ -3,8 +3,7 @@
 private class Games.GameBoyPlugin : Object, Plugin {
 	public GameSource get_game_source () throws Error {
 		var connection = Tracker.Sparql.Connection.@get ();
-		var source = new TrackerGameSource (connection);
-		source.add_query (new GameBoyTrackerQuery ());
+		var source = new TrackerGameSource (connection, new GameBoyTrackerQuery ());
 
 		return source;
 	}

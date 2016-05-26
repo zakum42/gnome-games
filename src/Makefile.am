@@ -130,6 +130,7 @@ gnome_games_SOURCES = \
 	utils/grep.vala \
 	utils/local-cover.vala \
 	utils/string-input-stream.vala \
+	utils/xml-doc.vala \
 	\
 	config.vala \
 	credits.vala \
@@ -159,6 +160,7 @@ gnome_games_VALAFLAGS = \
 	--pkg glib-2.0 \
 	--pkg grilo-0.3 \
 	--pkg gtk+-3.0 \
+	--pkg libxml-2.0 \
 	--pkg libsoup-2.4 \
 	--pkg tracker-sparql-1.0 \
 	--pkg retro-gobject-0.6 \

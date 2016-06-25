@@ -5,9 +5,16 @@ public class Games.TrackerGameSource : Object, GameSource {
 
 	private Tracker.Sparql.Connection connection { private set; get; }
 	private TrackerQuery[] queries;
+	public bool supports_multidisk { private set; get; }
 
 	public TrackerGameSource (Tracker.Sparql.Connection connection) {
 		this.connection = connection;
+		this.supports_multidisk = false;
+	}
+
+	public TrackerGameSource.md_support (Tracker.Sparql.Connection connection, bool supports_multidisk) {
+		this.connection = connection;
+		this.supports_multidisk = supports_multidisk;
 	}
 
 	construct {

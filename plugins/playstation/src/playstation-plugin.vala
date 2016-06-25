@@ -4,12 +4,12 @@ private class Games.PlayStation : Object, Plugin {
 	private const string FINGERPRINT_PREFIX = "playstation";
 	private const string MIME_TYPE = "application/x-cue";
 	private const string MODULE_BASENAME = "libretro-playstation.so";
-	private const bool SUPPORTS_SNAPSHOTTING = false;
+	private const bool SUPPORTS_SNAPSHOTTING = true;
 
 	public GameSource get_game_source () throws Error {
 		var query = new MimeTypeTrackerQuery (MIME_TYPE, game_for_uri);
 		var connection = Tracker.Sparql.Connection.@get ();
-		var source = new TrackerGameSource (connection);
+		var source = new TrackerGameSource.md_support (connection, true);
 		source.add_query (query);
 
 		return source;

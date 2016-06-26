@@ -103,8 +103,10 @@ private class Games.Application : Gtk.Application {
 			try {
 				var plugin = plugin_registrar.get_plugin ();
 				var source = plugin.get_game_source ();
-				if (source != null)
-					sources += source;
+				if (source != null) {
+					if (source is TrackerGameSourceMultiDisk) multidisk_sources += source;
+					else sources += source;
+				}
 			}
 			catch (Error e) {
 				debug ("Error: %s", e.message);
@@ -112,9 +114,11 @@ private class Games.Application : Gtk.Application {
 		});
 
 		foreach (var source in sources) {
-			if (source is TrackerGameSource && check_multidisk_support(source))
-				multidisk_sources += source;
-			else yield source.each_game (add_game);
+			yield source.each_game (add_game);
+		}
+
+		foreach (var source in multidisk_sources) {
+			yield source.each_game (add_game);
 		}
 
 		if (connection == null)
@@ -127,11 +131,6 @@ private class Games.Application : Gtk.Application {
 
 	private void add_game (Game game) {
 		collection.append (game);
-	}
-
-	private bool check_multidisk_support(GameSource source) {
-		var aux = (TrackerGameSource) source;
-		return aux.supports_multidisk;
 	}
 
 	private void preferences () {

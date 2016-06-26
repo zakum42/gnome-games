@@ -60,6 +60,7 @@ gnome_games_SOURCES = \
 	tracker/mime-type-tracker-query.vala \
 	tracker/tracker-game-source.vala \
 	tracker/tracker-query.vala \
+	tracker/tracker-game-source-multi-disk.vala \
 	\
 	ui/application.vala \
 	ui/application-window.vala \
@@ -87,6 +88,7 @@ gnome_games_SOURCES = \
 	utils/generic-title.vala \
 	utils/generic-uid.vala \
 	utils/grep.vala \
+	utils/jaro-winkler-distance.vala \
 	\
 	config.vala \
 	credits.vala \

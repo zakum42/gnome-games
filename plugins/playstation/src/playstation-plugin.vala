@@ -9,7 +9,7 @@ private class Games.PlayStation : Object, Plugin {
 	public GameSource get_game_source () throws Error {
 		var query = new MimeTypeTrackerQuery (MIME_TYPE, game_for_uri);
 		var connection = Tracker.Sparql.Connection.@get ();
-		var source = new TrackerGameSource.md_support (connection, true);
+		var source = new TrackerGameSourceMultiDisk (connection);
 		source.add_query (query);
 
 		return source;

@@ -22,4 +22,12 @@ public class Games.FilenameTitle : Object, Title {
 
 		return name;
 	}
+
+	public string get_raw_title () throws Error {
+		var file = File.new_for_uri (uri);
+		var raw_name = file.get_basename ();
+		raw_name = filename_ext_regex.replace (raw_name, raw_name.length, 0, "");
+
+		return raw_name;
+	}
 }

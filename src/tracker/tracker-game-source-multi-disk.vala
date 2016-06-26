@@ -1,12 +1,12 @@
 // This file is part of GNOME Games. License: GPLv3
 
-public class Games.TrackerGameSource : Object, GameSource {
+public class Games.TrackerGameSourceMultiDisk : Object, GameSource {
 	private const uint HANDLED_GAMES_PER_CYCLE = 5;
 
 	private Tracker.Sparql.Connection connection { private set; get; }
 	private TrackerQuery[] queries;
 
-	public TrackerGameSource (Tracker.Sparql.Connection connection) {
+	public TrackerGameSourceMultiDisk (Tracker.Sparql.Connection connection) {
 		this.connection = connection;
 	}
 
@@ -25,6 +25,7 @@ public class Games.TrackerGameSource : Object, GameSource {
 
 	public async void each_game_for_query (GameCallback game_callback, TrackerQuery query) {
 		var sparql = query.get_query ();
+		string[] titles = {};
 
 		Tracker.Sparql.Cursor cursor;
 		try {
@@ -48,9 +49,15 @@ public class Games.TrackerGameSource : Object, GameSource {
 		while (is_cursor_valid) {
 			if (query.is_cursor_valid (cursor))
 				try {
+					// These lines will be removed once the multi-disk support is fully implemented
 					var game = query.game_for_cursor (cursor);
 					game_callback (game);
 					handled_games++;
+
+					// WIP CODE
+					var uri = cursor.get_string (0);
+					var title = new FilenameTitle (uri).get_raw_title();
+					titles += title;
 
 					// Free the execution only once every HANDLED_GAMES_PER_CYCLE
 					// games to speed up the execution by avoiding too many context
@@ -78,9 +85,30 @@ public class Games.TrackerGameSource : Object, GameSource {
 				continue;
 			}
 		}
+		// Alternative: use Gee.List and remove games from the list once they've been added
+		bool[] game_added = new bool[titles.length];
+		for (int i = 0; i < game_added.length; ++i)
+			game_added[i] = false;
+		for (int i = 0; i < titles.length; ++i) {
+			if (!game_added[i]) {
+				string t1 = titles[i];
+				string[] disk_list = {t1};
+				game_added[i] = true;
+				for (int j = 0; j < titles.length; ++j) {
+					if (!game_added[j]) {
+						string t2 = titles[j];
+						bool b1 = t1.down().contains("disc")||t1.down().contains("disk")||t1.down().contains("track");
+						bool b2 = t2.down().contains("disc")||t2.down().contains("disk")||t2.down().contains("track");
+						if (b1 && b2 && (JaroWinklerDistance.distance(t1, t2) >= 0.9))  {
+							disk_list += t2;
+							game_added[j] = true;
+						}
+					}
+				}
+			//Create the game here, once we get all its parts
+			foreach(var k in disk_list) stdout.printf(k+"\n");
+			//++handled_games;
+			}
+		}
 	}
-}
-
-public errordomain TrackerError {
-	FILE_NOT_FOUND,
 }
